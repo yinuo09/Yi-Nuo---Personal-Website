@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正在做的事 — 一诺</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #faf9f7;
+            --text: #1a1a1a;
+            --text-secondary: #555;
+            --text-tertiary: #999;
+            --accent: #b46428;
+            --accent-light: #c9a362;
+            --card-bg: #fff;
+            --border: #e8e4df;
+            --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg); color: var(--text);
+            line-height: 1.8; -webkit-font-smoothing: antialiased;
+        }
+        .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+        
+        .header { padding: 32px 0; border-bottom: 1px solid var(--border); margin-bottom: 48px; }
+        .back-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: var(--text-secondary); text-decoration: none;
+            font-size: 14px; transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--accent); }
+        .back-link svg { width: 16px; height: 16px; }
+        
+        h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 34px; font-weight: 700; margin-bottom: 12px;
+        }
+        .subtitle { font-size: 16px; color: var(--text-secondary); margin-bottom: 24px; }
+        
+        .intro-callout {
+            background: #fdf6ed; border-left: 3px solid var(--accent-light);
+            padding: 18px 22px; border-radius: 0 8px 8px 0;
+            margin-bottom: 56px; font-size: 15px; color: var(--text-secondary);
+            line-height: 1.9;
+        }
+        .intro-callout strong { color: var(--text); }
+        
+        .project { margin-bottom: 64px; }
+        .project-header {
+            display: flex; align-items: center; gap: 12px; margin-bottom: 8px;
+        }
+        .project-icon {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: var(--accent); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px; font-weight: 700; flex-shrink: 0;
+        }
+        .project-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 22px; font-weight: 600;
+        }
+        .project-line { flex: 1; height: 1px; background: var(--border); }
+        
+        .project-intro {
+            font-size: 15px; color: var(--text-secondary);
+            line-height: 1.9; margin-bottom: 24px; padding-left: 48px;
+        }
+        
+        .block {
+            background: var(--card-bg); border-radius: 14px;
+            padding: 28px; border: 1px solid var(--border);
+            box-shadow: var(--shadow); margin-bottom: 16px;
+        }
+        .block h3 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 17px; font-weight: 600; margin-bottom: 14px;
+        }
+        .block p {
+            font-size: 14px; color: var(--text-secondary); line-height: 1.9;
+            margin-bottom: 12px;
+        }
+        .block p:last-child { margin-bottom: 0; }
+        .block strong { color: var(--text); font-weight: 600; }
+        .block ul {
+            padding-left: 20px; margin: 10px 0;
+            font-size: 14px; color: var(--text-secondary); line-height: 2;
+        }
+        .block li { margin-bottom: 6px; }
+        .block li strong { color: var(--text); }
+        
+        .category-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+            margin-top: 14px;
+        }
+        .cat-item {
+            background: #faf8f5; border-radius: 10px;
+            padding: 16px; border: 1px solid var(--border);
+        }
+        .cat-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .cat-count { font-size: 12px; color: var(--accent); font-weight: 500; margin-bottom: 6px; }
+        .cat-desc { font-size: 12px; color: var(--text-tertiary); line-height: 1.6; }
+        
+        .principle-item {
+            background: #faf8f5; border-radius: 10px;
+            padding: 16px; border: 1px solid var(--border);
+            margin-bottom: 12px;
+        }
+        .principle-num { font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+        .principle-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .principle-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+        
+        .footer {
+            padding: 24px 0 40px; text-align: center;
+            font-size: 13px; color: var(--text-tertiary);
+            border-top: 1px solid var(--border); margin-top: 40px;
+        }
+        .footer a { color: var(--accent); text-decoration: none; }
+        
+        @media (max-width: 480px) {
+            h1 { font-size: 26px; }
+            .container { padding: 0 16px; }
+            .block { padding: 22px; }
+            .category-grid { grid-template-columns: 1fr; }
+            .project-intro { padding-left: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="../index.html" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                返回首页
+            </a>
+        </header>
+        
+        <main>
+            <h1>正在做的事</h1>
+            <p class="subtitle">做比说重要，完成比完美重要</p>
+            
+            <div class="intro-callout">
+                <strong>知识不会消失，只会被覆盖。</strong>这两个项目是我在AI时代践行"在解决问题中自然沉淀内容"的核心实践。不是规划出来的，是在做事的过程中长出来的。
+            </div>
+            
+            <!-- ==================== 项目一 ==================== -->
+            <div class="project" id="project-1">
+                <div class="project-header">
+                    <div class="project-icon">1</div>
+                    <span class="project-title">用AI做的100件小事</span>
+                    <span class="project-line"></span>
+                </div>
+                <p class="project-intro">
+                    收集100个真实、可复用、5分钟内完成的AI应用案例。不是概念演示，是每个人都能照着做的小事。
+                </p>
+                
+                <div class="block">
+                    <h3>解决什么问题</h3>
+                    <p>很多人觉得AI很强大，但不知道从哪开始用。看了很多AI新闻、很多"AI神器"推荐，但到自己手上就不知道做什么。<strong>问题不是AI不够好，是缺少具体的使用场景。</strong></p>
+                    <p>这个项目就是给出100个具体答案——不是"AI可以帮你写作"这种废话，而是"用AI把这篇2000字文章缩成3条朋友圈文案，5分钟搞定"这种可以直接照做的小事。每件小事都来自真实需求，每件小事都验证过可行。</p>
+                </div>
+                
+                <div class="block">
+                    <h3>主要内容</h3>
+                    <p>100件小事覆盖6个分类，每个分类聚焦一个生活场景：</p>
+                    <div class="category-grid">
+                        <div class="cat-item">
+                            <div class="cat-name">生活</div>
+                            <div class="cat-count">20件</div>
+                            <div class="cat-desc">日常生活中的AI应用：做饭、购物、健身、旅行规划等</div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-name">创作</div>
+                            <div class="cat-count">20件</div>
+                            <div class="cat-desc">内容创作场景：写文案、做封面、剪视频、起标题等</div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-name">学习</div>
+                            <div class="cat-count">20件</div>
+                            <div class="cat-desc">学习提效：整理笔记、做知识卡片、翻译论文、生成练习题等</div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-name">工作</div>
+                            <div class="cat-count">20件</div>
+                            <div class="cat-desc">工作效率：写周报、做PPT、数据分析、会议纪要等</div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-name">社交</div>
+                            <div class="cat-count">10件</div>
+                            <div class="cat-desc">社交场景：回消息、写贺卡、做邀请函、朋友圈文案等</div>
+                        </div>
+                        <div class="cat-item">
+                            <div class="cat-name">好玩</div>
+                            <div class="cat-count">10件</div>
+                            <div class="cat-desc">纯粹好玩的探索：AI算命、AI写诗、AI画画、AI聊天等</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="block">
+                    <h3>每件小事的结构</h3>
+                    <p>不是随便写写，每件小事都包含四个部分：</p>
+                    <ul>
+                        <li><strong>痛点</strong> — 为什么要用AI做这件事？传统方式有什么问题？</li>
+                        <li><strong>反常识</strong> — 大多数人不知道AI还能这么用，或者以为很难其实很简单</li>
+                        <li><strong>解决方案</strong> — 具体步骤，5分钟内能完成，照着做就行</li>
+                        <li><strong>金句</strong> — 一句话总结，含行动号召，可以直接分享</li>
+                    </ul>
+                    <p><strong>发布平台：</strong>抖音合集 + 公众号合集，视频和文章持续输出。</p>
+                </div>
+            </div>
+            
+            <!-- ==================== 项目二 ==================== -->
+            <div class="project" id="project-2">
+                <div class="project-header">
+                    <div class="project-icon">2</div>
+                    <span class="project-title">数字产品操作系统</span>
+                    <span class="project-line"></span>
+                </div>
+                <p class="project-intro">
+                    基于萨希尔·拉文吉亚《小而美》七原则，构建从灵感到产品的完整工作流。不是做产品的方法论，是做产品的操作系统。
+                </p>
+                
+                <div class="block">
+                    <h3>解决什么问题</h3>
+                    <p><strong>有想法但做不出来，做出来但卖不出去。</strong>这是大多数人做数字产品的困境。市面上不缺"如何做产品"的课程，但它们要么太理论（讲一堆框架但不落地），要么太具体（教你用某个工具但换个场景就不会了）。</p>
+                    <p>这套系统解决的是中间那层：<strong>从碎片想法到可交付产品之间的完整路径。</strong>不是教你写代码，是帮你想清楚——这个想法值不值得做？做到什么程度可以交付？交付后怎么迭代？</p>
+                </div>
+                
+                <div class="block">
+                    <h3>主要内容</h3>
+                    <p>整个系统由四层结构组成，每一层解决一个阶段的问题：</p>
+                    <ul>
+                        <li><strong>灵感库</strong> — 收集所有碎片想法，不管多小。灵感不是等来的，是攒出来的。每个灵感都记录痛点、场景、可行性。</li>
+                        <li><strong>产品方向</strong> — 从灵感库中筛选出值得做的方向。判断标准不是"能不能做"，而是"该不该做"——有没有真实需求、能不能验证、做了之后有没有复利。</li>
+                        <li><strong>工作流</strong> — 从确定方向到交付产品的执行流程。包括需求定义、MVP设计、验证反馈、迭代优化。核心是"快做快验证"。</li>
+                        <li><strong>原则库</strong> — 沉淀下来的决策原则。每次做产品都会踩坑，踩完坑就提炼成原则，下次不用再踩。</li>
+                    </ul>
+                </div>
+                
+                <div class="block">
+                    <h3>核心纪律：代码是最后一步</h3>
+                    <p>这是整个系统最重要的原则。大多数人做数字产品的第一步是学技术、写代码，这完全是错的。<strong>代码是最后一步，第一步是验证需求。</strong></p>
+                    <p>正确顺序是：先确认有人需要 → 再设计解决方案 → 再用最简单的方式验证 → 最后才写代码。如果在验证阶段就发现方向不对，改方向比改代码容易一百倍。</p>
+                    <p>这个原则来自《小而美》的七条原则，每一条都是反直觉的：</p>
+                    
+                    <div class="principle-item">
+                        <div class="principle-num">原则 1</div>
+                        <div class="principle-name">先赚钱再花钱</div>
+                        <div class="principle-desc">不要先投入再想变现。先找到付费用户，再投入做产品。</div>
+                    </div>
+                    <div class="principle-item">
+                        <div class="principle-num">原则 2</div>
+                        <div class="principle-name">从社区开始</div>
+                        <div class="principle-desc">先找到一个你属于的社区，从社区的需求出发，而不是从你的想法出发。</div>
+                    </div>
+                    <div class="principle-item">
+                        <div class="principle-num">原则 3</div>
+                        <div class="principle-name">做你自己需要的产品</div>
+                        <div class="principle-desc">最好的产品验证是你自己就是用户。你自己都不用的产品，别人也不会用。</div>
+                    </div>
+                    <div class="principle-item">
+                        <div class="principle-num">原则 4</div>
+                        <div class="principle-name">代码是最后一步</div>
+                        <div class="principle-desc">先用No-code工具验证，验证通过再写代码。代码是放大器，不是起点。</div>
+                    </div>
+                    <div class="principle-item">
+                        <div class="principle-num">原则 5</div>
+                        <div class="principle-name">小而美比大而全好</div>
+                        <div class="principle-desc">做一个功能做到极致，比做十个功能都平庸强。小产品可以有大价值。</div>
+                    </div>
+                    <div class="principle-item">
+                        <div class="principle-num">原则 6</div>
+                        <div class="principle-name"> retain比acquire重要</div>
+                        <div class="principle-desc">留住现有用户比获取新用户重要。一个老用户的价值等于十个新用户。</div>
+                    </div>
+                    <div class="principle-item">
+                        <div class="principle-num">原则 7</div>
+                        <div class="principle-name">复利思维</div>
+                        <div class="principle-desc">每天进步1%，一年后是37倍。做产品不是冲刺，是复利游戏。</div>
+                    </div>
+                </div>
+                
+                <div class="block">
+                    <h3>两套系统并行</h3>
+                    <p>目前我有两套系统并行运行：</p>
+                    <ul>
+                        <li><strong>Obsidian内容系统</strong> — 管创作，从灵感到口播到分发，每天产出短视频和文章</li>
+                        <li><strong>数字产品系统</strong> — 管产品开发，从灵感到MVP到交付，做可复用的数字产品</li>
+                    </ul>
+                    <p>两套系统共享灵感库，但执行路径不同。内容系统的产出是文章和视频，产品系统的产出是工具和模板。它们互相喂养——做产品的过程变成内容，做内容的过程沉淀为产品。</p>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>© 2026 一诺 · <a href="../index.html">返回首页</a></p>
+        </footer>
+    </div>
+</body>
+</html>

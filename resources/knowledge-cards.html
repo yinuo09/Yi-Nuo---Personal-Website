@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识卡片库 — 一诺</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #faf9f7;
+            --text: #1a1a1a;
+            --text-secondary: #666;
+            --text-tertiary: #999;
+            --accent: #b46428;
+            --accent-light: #c9a362;
+            --card-bg: #fff;
+            --border: #e8e4df;
+            --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .header {
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 48px;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        
+        .back-link:hover { color: var(--accent); }
+        .back-link svg { width: 16px; height: 16px; }
+        
+        h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+        }
+        
+        .tag-filter {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+        
+        .tag {
+            padding: 6px 16px;
+            border-radius: 100px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tag:hover, .tag.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        
+        .card-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding-bottom: 80px;
+        }
+        
+        .knowledge-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        
+        .knowledge-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .card-date {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            flex-shrink: 0;
+            margin-left: 12px;
+        }
+        
+        .card-excerpt {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        
+        .card-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .card-tag {
+            padding: 4px 10px;
+            border-radius: 100px;
+            background: #f5f2ed;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .footer {
+            padding: 24px 0 40px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-tertiary);
+            border-top: 1px solid var(--border);
+        }
+        
+        @media (max-width: 480px) {
+            h1 { font-size: 26px; }
+            .container { padding: 0 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="../index.html" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                返回首页
+            </a>
+        </header>
+        
+        <main>
+            <h1>知识卡片库</h1>
+            <p class="subtitle">精选知识卡片，一张卡片解决一个具体问题</p>
+            
+            <div class="tag-filter">
+                <span class="tag active">全部</span>
+                <span class="tag">个人成长</span>
+                <span class="tag">AI应用</span>
+                <span class="tag">认知升级</span>
+                <span class="tag">内容创作</span>
+            </div>
+            
+            <div class="card-grid">
+                <div class="knowledge-card">
+                    <div class="card-header">
+                        <div class="card-title">第一性原理：别问"怎么做"，问"为什么"</div>
+                        <div class="card-date">2026-07-02</div>
+                    </div>
+                    <div class="card-excerpt">
+                        大多数人遇到问题直接找解决方案，但更高效的方式是先问"这个问题为什么存在"。第一性原理不是找更好的方法，而是回到本质重新定义问题...
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag">认知升级</span>
+                        <span class="card-tag">第一性原理</span>
+                        <span class="card-tag">思维模型</span>
+                    </div>
+                </div>
+                
+                <div class="knowledge-card">
+                    <div class="card-header">
+                        <div class="card-title">铸卡流程：从灵感到知识资产</div>
+                        <div class="card-date">2026-07-01</div>
+                    </div>
+                    <div class="card-excerpt">
+                        灵感→审核三问→政委审查→密度评分→铸卡入库→卡片勾连。六道工序确保每张入库卡片都有长期价值，不是一次性内容...
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag">内容创作</span>
+                        <span class="card-tag">知识管理</span>
+                        <span class="card-tag">工作流</span>
+                    </div>
+                </div>
+                
+                <div class="knowledge-card">
+                    <div class="card-header">
+                        <div class="card-title">用AI做的100件小事：从想到做</div>
+                        <div class="card-date">2026-06-25</div>
+                    </div>
+                    <div class="card-excerpt">
+                        大多数人学AI停留在"知道它能做什么"，真正的价值在"用它做了什么"。这个项目记录真实、可复用、5分钟内完成的AI应用案例...
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag">AI应用</span>
+                        <span class="card-tag">实践</span>
+                        <span class="card-tag">项目</span>
+                    </div>
+                </div>
+                
+                <div class="knowledge-card">
+                    <div class="card-header">
+                        <div class="card-title">反完美主义：完成比完美重要100倍</div>
+                        <div class="card-date">2026-06-18</div>
+                    </div>
+                    <div class="card-excerpt">
+                        完美主义是拖延的精致包装。真正的创作者知道：发布一个80分的内容，比永远打磨一个100分但从未发布的内容有价值得多...
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag">个人成长</span>
+                        <span class="card-tag">反完美主义</span>
+                        <span class="card-tag">行动力</span>
+                    </div>
+                </div>
+                
+                <div class="knowledge-card">
+                    <div class="card-header">
+                        <div class="card-title">内容复利：一卡多用策略</div>
+                        <div class="card-date">2026-06-10</div>
+                    </div>
+                    <div class="card-excerpt">
+                        一张知识卡片可以变成：一条口播视频、一篇公众号文章、一条头条、一张配图、一个播客片段。关键是设计卡片时就考虑多平台适配...
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag">内容创作</span>
+                        <span class="card-tag">复利</span>
+                        <span class="card-tag">效率</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>© 2026 一诺 · 持续更新中</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 系统搭建指南 — 一诺</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #faf9f7;
+            --text: #1a1a1a;
+            --text-secondary: #666;
+            --text-tertiary: #999;
+            --accent: #b46428;
+            --accent-light: #c9a362;
+            --card-bg: #fff;
+            --border: #e8e4df;
+            --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        .header {
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 48px;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        
+        .back-link:hover {
+            color: var(--accent);
+        }
+        
+        .back-link svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        /* Content */
+        .content {
+            padding-bottom: 80px;
+        }
+        
+        h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+        }
+        
+        h2 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin: 48px 0 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--accent-light);
+            display: inline-block;
+        }
+        
+        h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 32px 0 12px;
+            color: var(--text);
+        }
+        
+        p {
+            margin-bottom: 16px;
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+        
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #f5f2ed 0%, #ebe7e0 100%);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .highlight-box p {
+            margin: 0;
+            color: var(--text);
+        }
+        
+        code {
+            background: #f0eeeb;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: 'SF Mono', monospace;
+        }
+        
+        .step-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 16px 0;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-right: 12px;
+        }
+        
+        .step-title {
+            font-size: 16px;
+            font-weight: 600;
+            display: inline;
+        }
+        
+        .step-desc {
+            margin-top: 12px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 24px 0 40px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-tertiary);
+            border-top: 1px solid var(--border);
+        }
+        
+        @media (max-width: 480px) {
+            h1 { font-size: 26px; }
+            h2 { font-size: 20px; }
+            .container { padding: 0 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="../index.html" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                返回首页
+            </a>
+        </header>
+        
+        <main class="content">
+            <h1>AI 系统搭建指南</h1>
+            <p class="subtitle">从0到1搭建个人AI工作流，让AI真正成为你的第二大脑</p>
+            
+            <div class="highlight-box">
+                <p><strong>核心理念：</strong>别学知识用知识，问题即产品。在解决问题中自然沉淀内容，反对脱离行动的空转思考。</p>
+            </div>
+            
+            <h2>系统架构</h2>
+            <p>我的AI系统由7个核心模块组成，形成完整的创作闭环：</p>
+            
+            <div class="step-card">
+                <span class="step-number">1</span>
+                <span class="step-title">灵感捕获</span>
+                <p class="step-desc">随时随地记录想法，用flomo或语音备忘录快速捕获。关键是降低记录门槛，先记下来再整理。</p>
+            </div>
+            
+            <div class="step-card">
+                <span class="step-number">2</span>
+                <span class="step-title">灵感引擎</span>
+                <p class="step-desc">定期回顾灵感库，用「灵感对撞机」让不同领域的想法碰撞，产生新的知识组合。</p>
+            </div>
+            
+            <div class="step-card">
+                <span class="step-number">3</span>
+                <span class="step-title">质量门禁</span>
+                <p class="step-desc">每条内容通过三道安检：可迁移性、耐久性、原创性。只有通过的才进入下一步。</p>
+            </div>
+            
+            <div class="step-card">
+                <span class="step-number">4</span>
+                <span class="step-title">选题验证</span>
+                <p class="step-desc">用数据验证选题价值，不是拍脑袋决定。看搜索量、竞品情况、自身差异化空间。</p>
+            </div>
+            
+            <div class="step-card">
+                <span class="step-number">5</span>
+                <span class="step-title">知识挖矿</span>
+                <p class="step-desc">深度研究一个主题，产出高密度知识卡片。一张卡片解决一个具体问题。</p>
+            </div>
+            
+            <div class="step-card">
+                <span class="step-number">6</span>
+                <span class="step-title">内容生产</span>
+                <p class="step-desc">基于知识卡片生成口播文案、公众号文章、头条内容。一卡多用，最大化内容复利。</p>
+            </div>
+            
+            <div class="step-card">
+                <span class="step-number">7</span>
+                <span class="step-title">分发适配</span>
+                <p class="step-desc">同一内容适配不同平台特性，抖音重情绪、公众号重深度、头条重信息密度。</p>
+            </div>
+            
+            <h2>系统铁律</h2>
+            <ol>
+                <li><strong>铸卡在前，口播在后</strong> — 只有卡片才入库，口播文案不入库</li>
+                <li><strong>第一性原理审视</strong> — 每个判断都问"这为什么成立"</li>
+                <li><strong>言行一致审查</strong> — 输出前检查自己是否做到了说的</li>
+                <li><strong>知识不会消失，只会被覆盖</strong> — 删除前先问是否产生过价值</li>
+            </ol>
+            
+            <h2>推荐工具</h2>
+            <ul>
+                <li><strong>Obsidian</strong> — 知识库管理，PARA+三环迭代系统</li>
+                <li><strong>flomo</strong> — 灵感捕获，降低记录门槛</li>
+                <li><strong>QClaw</strong> — AI助手，自动化工作流</li>
+                <li><strong>剪映</strong> — 视频剪辑，口播内容生产</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <p>💡 <strong>行动建议：</strong>不要一次性搭建完整系统。先选一个你最痛的环节（通常是灵感捕获或内容生产），用一个工具解决，跑通后再扩展。</p>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>© 2026 一诺 · 持续更新中</p>
+        </footer>
+    </div>
+</body>
+</html>

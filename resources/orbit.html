@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>一诺 — 我的项目</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --text: #ffffff;
+            --accent: #c9a362;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            font-family: '宋体', 'SimSun', 'Noto Serif SC', serif;
+            background: var(--bg);
+            color: var(--text);
+            height: 100%;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        body {
+            height: 100vh;
+            height: 100dvh;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px; left: 20px;
+            z-index: 100;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 100px;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text);
+            font-size: 13px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .back-btn:hover {
+            background: rgba(201,163,98,0.15);
+            border-color: rgba(201,163,98,0.3);
+        }
+        .back-btn svg { width: 16px; height: 16px; }
+
+        .coverflow-page {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            perspective: 1600px;
+        }
+
+        .coverflow-stage {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+
+        .cover-card {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            border-radius: 14px;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transform-origin: center center;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            cursor: pointer;
+            background: #1a1a1a;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .cover-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+        .cover-card-label {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            padding: 10px 14px;
+            background: linear-gradient(180deg, transparent, rgba(0,0,0,0.85));
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            pointer-events: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .cover-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: #000;
+            opacity: 0;
+            transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: none;
+        }
+
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 50;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #fff;
+        }
+        .nav-arrow:hover {
+            background: rgba(201,163,98,0.15);
+            border-color: rgba(201,163,98,0.3);
+        }
+        .nav-arrow svg { width: 20px; height: 20px; }
+        .nav-left { left: 20px; }
+        .nav-right { right: 20px; }
+
+        .indicators {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 50;
+        }
+        .indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .indicator.active {
+            width: 20px;
+            border-radius: 3px;
+            background: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .nav-arrow { width: 38px; height: 38px; }
+            .nav-arrow svg { width: 18px; height: 18px; }
+            .nav-left { left: 12px; }
+            .nav-right { right: 12px; }
+            .cover-card-label { font-size: 11px; padding: 8px 10px; }
+            .indicators { bottom: 16px; gap: 6px; }
+        }
+        @media (max-width: 480px) {
+            .back-btn { top: 12px; left: 12px; padding: 6px 12px; font-size: 11px; }
+            .back-btn svg { width: 14px; height: 14px; }
+            .nav-arrow { width: 34px; height: 34px; }
+            .nav-arrow svg { width: 16px; height: 16px; }
+            .nav-left { left: 8px; }
+            .nav-right { right: 8px; }
+            .cover-card-label { font-size: 10px; padding: 6px 8px; }
+        }
+        @media (max-width: 360px) {
+            .back-btn { font-size: 10px; padding: 5px 10px; }
+        }
+        @media (max-height: 500px) and (orientation: landscape) {
+            .indicators { bottom: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        返回
+    </a>
+
+    <div class="nav-arrow nav-left" id="navLeft">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </div>
+    <div class="nav-arrow nav-right" id="navRight">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </div>
+
+    <div class="coverflow-page" id="coverflowPage">
+        <div class="coverflow-stage" id="coverflowStage"></div>
+    </div>
+
+    <div class="indicators" id="indicators"></div>
+
+    <script>
+    (function() {
+        var stage = document.getElementById('coverflowStage');
+        var page = document.getElementById('coverflowPage');
+        if (!stage) return;
+
+        var items = [
+            { title: 'AI 时代成长手册', url: 'https://destiny-ptarmigan-c2e.notion.site/AI-205bc3525d0780e8a9adf565fc3f5664', external: true, img: '从学习者到表达者.png' },
+            { title: 'Ally · AI内容策略师', url: 'https://allyagent.netlify.app/', external: true, img: 'Ally内容策略师.jpg' },
+            { title: '今天都干了点啥', url: 'https://mp.weixin.qq.com/s/lqjhbZ8YLVZ6LyUkAPpqtA', external: true, img: '今天干了点啥.jpg' },
+            { title: 'CookMate 做饭伙伴', url: 'https://mp.weixin.qq.com/s/dKJ9g_e_jboBxYXibLqfpQ', external: true, img: 'cookmate.png' },
+            { title: '书单', url: 'https://destiny-ptarmigan-c2e.notion.site/121-218bc3525d0780b5b186e4b56463b4f7?pvs=143', external: true, img: '书单.jpg' },
+
+        ];
+
+        var n = items.length;
+        var active = 0;
+        var lockTimer = null;
+
+        var SCALE_STEP = 0.16;
+        var MAX_VISIBLE = 3;
+        var DEPTH = 240;
+        var TILT = 12;
+        var SIDE_TILT = 8;
+        var GAP = 5;
+        var DIM_OPACITY = 0.6;
+
+        function getCardDims() {
+            var w = window.innerWidth;
+            var h = window.innerHeight;
+            var isMobile = w <= 480;
+            var isTablet = w <= 768;
+            var isLandscape = h < 500;
+
+            var cardW, cardH;
+
+            if (isMobile) {
+                cardW = Math.min(w * 0.65, 180);
+                cardH = cardW;
+            } else if (isTablet) {
+                cardW = 220;
+                cardH = 220;
+            } else {
+                cardW = 280;
+                cardH = 280;
+            }
+
+            if (isLandscape && !isMobile) {
+                cardW = Math.min(cardW, 200);
+                cardH = cardW;
+            }
+
+            return { cardW: cardW, cardH: cardH };
+        }
+
+        var dims = getCardDims();
+
+        function createCards() {
+            stage.innerHTML = '';
+            for (var i = 0; i < n; i++) {
+                (function(idx) {
+                    var item = items[idx];
+                    var card = document.createElement('div');
+                    card.className = 'cover-card';
+                    card.style.width = dims.cardW + 'px';
+                    card.style.height = dims.cardH + 'px';
+
+                    var img = document.createElement('img');
+                    img.src = item.img;
+                    img.alt = item.title;
+                    card.appendChild(img);
+
+                    var label = document.createElement('div');
+                    label.className = 'cover-card-label';
+                    label.textContent = item.title;
+                    card.appendChild(label);
+
+                    var overlay = document.createElement('div');
+                    overlay.className = 'cover-card-overlay';
+                    card.appendChild(overlay);
+
+    card.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (idx !== active) {
+                            setActive(idx);
+                        } else {
+                            if (items[idx].external) {
+                                window.open(items[idx].url, '_blank');
+                            } else {
+                                window.location.href = items[idx].url;
+                            }
+                        }
+                    });
+
+                    card.addEventListener('mouseenter', function() {
+                        if (idx !== active && !lockTimer) {
+                            setActive(idx);
+                        }
+                    });
+
+                    stage.appendChild(card);
+                })(i);
+            }
+        }
+
+        function updateCards() {
+            var cards = stage.querySelectorAll('.cover-card');
+            for (var i = 0; i < cards.length; i++) {
+                var rel = i - active;
+                if (rel > n / 2) rel -= n;
+                if (rel < -n / 2) rel += n;
+
+                var ax = Math.abs(rel);
+                var visible = ax <= MAX_VISIBLE;
+                var isActive = rel === 0;
+
+                var sc = Math.max(0.4, 1 - ax * SCALE_STEP);
+                var tx = rel * (GAP * 30);
+                var tz = -ax * DEPTH;
+                var ry = -rel * TILT;
+                var rz = rel * SIDE_TILT;
+
+                if (visible) {
+                    cards[i].style.display = 'block';
+                    cards[i].style.transform =
+                        'translate(-50%, -50%) translateX(' + tx + 'px) translateZ(' + tz + 'px) rotateY(' + ry + 'deg) rotateZ(' + rz + 'deg) scale(' + sc + ')';
+                    cards[i].style.opacity = '1';
+                    cards[i].style.zIndex = String(Math.round((MAX_VISIBLE - ax) * 100));
+                } else {
+                    cards[i].style.opacity = '0';
+                    cards[i].style.zIndex = '0';
+                }
+
+                var overlay = cards[i].querySelector('.cover-card-overlay');
+                if (overlay) {
+                    overlay.style.opacity = isActive ? '0' : String(DIM_OPACITY);
+                }
+            }
+        }
+
+        function setActive(idx) {
+            if (lockTimer) return;
+            active = ((idx % n) + n) % n;
+            updateCards();
+            updateIndicators();
+            lockTimer = setTimeout(function() { lockTimer = null; }, 350);
+        }
+
+        function step(dir) {
+            setActive(active + dir);
+        }
+
+        function createIndicators() {
+            var ind = document.getElementById('indicators');
+            ind.innerHTML = '';
+            for (var i = 0; i < n; i++) {
+                (function(idx) {
+                    var dot = document.createElement('div');
+                    dot.className = 'indicator' + (idx === active ? ' active' : '');
+                    dot.addEventListener('click', function() { setActive(idx); });
+                    ind.appendChild(dot);
+                })(i);
+            }
+        }
+
+        function updateIndicators() {
+            var dots = document.querySelectorAll('.indicator');
+            for (var i = 0; i < dots.length; i++) {
+                dots[i].className = 'indicator' + (i === active ? ' active' : '');
+            }
+        }
+
+        // 自动轮播，3秒，不暂停
+        var autoplayTimer = setInterval(function() {
+            step(1);
+        }, 3000);
+
+        document.getElementById('navLeft').addEventListener('click', function() { step(-1); });
+        document.getElementById('navRight').addEventListener('click', function() { step(1); });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+            else if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+        });
+
+        var touchStartX = 0;
+        var touchStartY = 0;
+        page.addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+        page.addEventListener('touchend', function(e) {
+            var dx = e.changedTouches[0].clientX - touchStartX;
+            var dy = e.changedTouches[0].clientY - touchStartY;
+            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+                if (dx > 0) step(-1);
+                else step(1);
+            }
+        }, { passive: true });
+
+        var resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                dims = getCardDims();
+                createCards();
+                updateCards();
+            }, 150);
+        });
+
+        window.addEventListener('orientationchange', function() {
+            setTimeout(function() {
+                dims = getCardDims();
+                createCards();
+                updateCards();
+            }, 300);
+        });
+
+        createCards();
+        updateCards();
+        createIndicators();
+    })();
+    </script>
+</body>
+</html>

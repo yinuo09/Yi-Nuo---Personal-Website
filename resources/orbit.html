@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f3ebdc">
+    <meta name="description" content="一诺的项目档案——AI 时代成长手册、Ally·AI内容策略师、CookMate 等 5 件作品。">
+    <title>项目档案 — 一诺</title>
+    <link rel="preload" href="../assets/fonts/chakra-petch-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fonts/azeret-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <style>
+        @font-face {
+            font-family: 'Chakra Petch';
+            font-style: normal;
+            font-weight: 300;
+            font-display: swap;
+            src: url('../assets/fonts/chakra-petch-latin-300-normal.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'Chakra Petch';
+            font-style: normal;
+            font-weight: 500;
+            font-display: swap;
+            src: url('../assets/fonts/chakra-petch-latin-500-normal.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'Chakra Petch';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url('../assets/fonts/chakra-petch-latin-700-normal.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'Azeret Mono';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('../assets/fonts/azeret-mono-latin-400-normal.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'Azeret Mono';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url('../assets/fonts/azeret-mono-latin-600-normal.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'Azeret Mono';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url('../assets/fonts/azeret-mono-latin-700-normal.woff2') format('woff2');
+        }
+
+        :root {
+            color-scheme: light;
+            --paper: oklch(94% 0.035 78);
+            --paper-soft: oklch(91% 0.045 78);
+            --paper-deep: oklch(84% 0.06 73);
+            --ink: oklch(18% 0.035 82);
+            --ink-soft: oklch(32% 0.045 80);
+            --ash: oklch(54% 0.04 80);
+            --line: oklch(73% 0.055 77);
+            --gold: oklch(68% 0.145 74);
+            --gold-bright: oklch(76% 0.165 80);
+            --sun: oklch(64% 0.19 43);
+            --sun-deep: oklch(52% 0.17 38);
+            --night: oklch(17% 0.035 185);
+            --night-soft: oklch(24% 0.04 170);
+            --rice: oklch(97% 0.02 82);
+            --focus: oklch(58% 0.18 42);
+            --shadow: 0 28px 90px oklch(24% 0.05 75 / 0.22);
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-quint: cubic-bezier(0.22, 1, 0.36, 1);
+            --font-display: 'Chakra Petch', 'MiSans', 'HarmonyOS Sans SC', 'PingFang SC', 'Noto Sans SC', sans-serif;
+            --font-serif: 'Songti SC', 'Noto Serif SC', 'STSong', 'SimSun', serif;
+            --font-mono: 'Azeret Mono', 'Cascadia Mono', 'Consolas', monospace;
+            --header-height: 74px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { background: var(--paper); overflow-x: clip; -webkit-text-size-adjust: 100%; }
+
+        body {
+            min-width: 320px;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 82% 6%, oklch(82% 0.11 79 / 0.5), transparent 17rem),
+                linear-gradient(90deg, oklch(20% 0.015 80 / 0.032) 1px, transparent 1px),
+                linear-gradient(0deg, oklch(20% 0.015 80 / 0.028) 1px, transparent 1px),
+                var(--paper);
+            background-size: auto, 112px 112px, 112px 112px, auto;
+            font-family: var(--font-serif);
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        body::before {
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+            pointer-events: none;
+            content: "";
+            opacity: 0.4;
+            mix-blend-mode: multiply;
+            background:
+                radial-gradient(circle at 18% 21%, oklch(100% 0 0 / 0.55), transparent 0.08rem),
+                radial-gradient(circle at 76% 63%, oklch(36% 0.05 70 / 0.16), transparent 0.07rem),
+                radial-gradient(circle at 48% 88%, oklch(38% 0.07 35 / 0.13), transparent 0.06rem);
+            background-size: 0.7rem 0.85rem, 1.1rem 1.3rem, 0.95rem 1.05rem;
+        }
+
+        ::selection { background: var(--sun); color: var(--rice); }
+
+        :focus-visible {
+            outline: 3px solid var(--focus);
+            outline-offset: 5px;
+            border-radius: 2px;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        button, a { -webkit-tap-highlight-color: transparent; }
+
+        /* ---------- top bar ---------- */
+        .gallery-top {
+            position: relative;
+            z-index: 6;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            min-height: var(--header-height);
+            padding: max(0.6rem, env(safe-area-inset-top)) clamp(1rem, 3vw, 2rem) 0.6rem;
+        }
+        .back {
+            justify-self: start;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            min-height: 44px;
+            color: var(--ink-soft);
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 180ms var(--ease), transform 240ms var(--ease);
+        }
+        .back-ic {
+            display: grid;
+            place-items: center;
+            width: 1.44rem;
+            aspect-ratio: 1;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            font-family: var(--font-serif);
+            font-size: 0.92em;
+            line-height: 1;
+            transition: background 180ms var(--ease), color 180ms var(--ease), border-color 180ms var(--ease);
+        }
+        .back:hover, .back:focus-visible {
+            color: var(--sun-deep);
+            transform: translateX(-0.2rem);
+        }
+        .back:hover .back-ic, .back:focus-visible .back-ic {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--rice);
+        }
+        .gallery-top__title {
+            font-family: var(--font-display);
+            font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            white-space: nowrap;
+        }
+        .gallery-top__count {
+            justify-self: end;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.16em;
+            color: var(--ash);
+            white-space: nowrap;
+        }
+        .gallery-top__count em {
+            font-style: normal;
+            color: var(--sun-deep);
+            font-weight: 700;
+        }
+
+        /* ---------- rack ---------- */
+        .rack {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: clamp(0.6rem, 2vh, 1.2rem) 0;
+        }
+        .rack::-webkit-scrollbar { display: none; }
+
+        .plate {
+            flex: none;
+            scroll-snap-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 1.4rem;
+            opacity: 0.6;
+            transition: opacity 0.5s var(--ease);
+            cursor: pointer;
+        }
+        .plate.is-active { opacity: 1; }
+
+        .plate__frame {
+            position: relative;
+            border: 1px solid var(--line);
+            background: var(--paper-soft);
+            box-shadow: 0 14px 34px oklch(24% 0.05 75 / 0.12), 0 2px 6px oklch(24% 0.05 75 / 0.06);
+            overflow: hidden;
+            transition: border-color 0.45s var(--ease), box-shadow 0.55s var(--ease);
+        }
+        .plate__frame::before {
+            content: "";
+            position: absolute;
+            top: 0.6rem;
+            left: 0.6rem;
+            z-index: 2;
+            width: 0.6rem;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: var(--sun);
+            box-shadow: 0 0 0 0.16rem var(--paper), 0 0 0 0.34rem oklch(64% 0.19 43 / 0.22);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 260ms var(--ease), transform 420ms var(--ease);
+        }
+        .plate img {
+            display: block;
+            height: clamp(200px, 40vh, 400px);
+            width: auto;
+            max-width: 80vw;
+            object-fit: cover;
+            mix-blend-mode: multiply;
+            filter: saturate(1.02) contrast(1.05);
+            transition: transform 0.6s var(--ease);
+        }
+        .plate:not(.is-active) img { transform: scale(0.965); }
+        .plate.is-active .plate__frame {
+            border-color: var(--gold);
+            box-shadow: 0 18px 50px oklch(24% 0.05 75 / 0.2), 0 2px 8px oklch(24% 0.05 75 / 0.08);
+        }
+        .plate.is-active .plate__frame::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .plate__caption {
+            margin-top: 0.9rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.55rem;
+            max-width: 80vw;
+        }
+        .plate__index {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: var(--line);
+            transition: color 0.4s var(--ease);
+            flex-shrink: 0;
+        }
+        .plate__title {
+            font-family: var(--font-serif);
+            font-size: 1.02rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .plate.is-active .plate__index { color: var(--gold); }
+        .plate.is-active .plate__title {
+            text-decoration: underline;
+            text-decoration-color: var(--gold-bright);
+            text-decoration-thickness: 1.5px;
+            text-underline-offset: 5px;
+        }
+
+        .plate__goto {
+            margin-top: 0.42rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            opacity: 0;
+            transform: translateY(0.2rem);
+            transition: opacity 0.4s var(--ease), transform 0.5s var(--ease), color 0.2s var(--ease);
+        }
+        .plate__goto-ic {
+            display: grid;
+            place-items: center;
+            width: 1.3rem;
+            aspect-ratio: 1;
+            border: 1px solid currentColor;
+            border-radius: 50%;
+            font-family: var(--font-serif);
+            font-size: 0.78em;
+            line-height: 1;
+        }
+        .plate.is-active .plate__goto { opacity: 1; transform: translateY(0); }
+        .plate:hover .plate__goto, .plate:focus-visible .plate__goto { color: var(--sun-deep); }
+
+        /* ---------- arrows ---------- */
+        .arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5;
+            width: 2.9rem;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 1px solid var(--gold);
+            background: oklch(97% 0.02 82 / 0.9);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            color: var(--ink);
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease);
+        }
+        .arrow:hover, .arrow:focus-visible {
+            background: var(--sun-deep);
+            border-color: var(--sun-deep);
+            color: var(--rice);
+        }
+        .arrow svg {
+            width: 1.1rem;
+            height: 1.1rem;
+            fill: none;
+            stroke: currentColor;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 1.6;
+        }
+        .arrow--left { left: clamp(0.8rem, 2.6vw, 2.2rem); }
+        .arrow--right { right: clamp(0.8rem, 2.6vw, 2.2rem); }
+
+        /* ---------- vertical rail (right edge) ---------- */
+        .rail-vertical {
+            position: fixed;
+            right: clamp(1rem, 2.6vw, 2.4rem);
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.9rem;
+            color: var(--ink-soft);
+            font-family: var(--font-serif);
+            font-size: clamp(0.86rem, 1.2vw, 1.05rem);
+            pointer-events: none;
+        }
+        .rail-vertical span {
+            writing-mode: vertical-rl;
+            letter-spacing: 0.18em;
+            line-height: 1.3;
+        }
+        .rail-vertical i {
+            width: 1px;
+            height: clamp(3rem, 7vw, 5rem);
+            background: var(--line);
+        }
+
+        /* ---------- gallery foot ---------- */
+        .gallery-foot {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.4rem;
+            padding: 0.8rem clamp(1.2rem, 3vw, 2rem) 1rem;
+            border-top: 1px solid var(--line);
+        }
+        .ticks { display: flex; gap: 0.5rem; }
+        .tick {
+            width: 1rem;
+            height: 1rem;
+            border: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--ink-soft) 0 0.22rem, transparent 0.24rem);
+            opacity: 0.55;
+            cursor: pointer;
+            transition: opacity 180ms var(--ease), transform 320ms var(--ease-quint), background 180ms var(--ease);
+        }
+        .tick:hover, .tick:focus-visible, .tick.is-active {
+            background: radial-gradient(circle, var(--sun) 0 0.24rem, transparent 0.26rem);
+            opacity: 1;
+            transform: scale(1.2);
+        }
+        .play {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 0;
+            background: none;
+            padding: 0.6rem 0.7rem;
+            margin: -0.6rem -0.7rem;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            color: var(--ink-soft);
+            cursor: pointer;
+            transition: color 180ms var(--ease);
+        }
+        .play:hover, .play:focus-visible { color: var(--sun-deep); }
+        .play svg {
+            width: 0.85rem;
+            height: 0.85rem;
+            fill: none;
+            stroke: currentColor;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 1.7;
+        }
+
+        /* ---------- night footer ---------- */
+        .site-footer {
+            display: grid;
+            grid-template-columns: auto 1fr auto auto;
+            align-items: center;
+            gap: clamp(1rem, 4vw, 3rem);
+            padding: 0.6rem clamp(1.2rem, 3vw, 2rem);
+            color: var(--gold-bright);
+            background: var(--night);
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .brand-mark {
+            position: relative;
+            width: 1.55rem;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1px solid oklch(70% 0.1 80 / 0.5);
+            background:
+                linear-gradient(90deg, transparent 49%, var(--rice) 49% 51%, transparent 51%),
+                linear-gradient(0deg, transparent 49%, var(--rice) 49% 51%, transparent 51%),
+                radial-gradient(circle at 72% 25%, var(--rice) 0 19%, transparent 20%),
+                linear-gradient(135deg, var(--gold) 0 38%, var(--sun) 38% 58%, var(--night-soft) 58%);
+        }
+        .brand-mark span {
+            position: absolute;
+            inset: 58% 0 0;
+            background: oklch(24% 0.04 170 / 0.8);
+        }
+        .brand-word {
+            display: grid;
+            gap: 0.08rem;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            line-height: 1;
+            letter-spacing: 0.04em;
+        }
+        .site-footer p { margin: 0; color: oklch(74% 0.08 84 / 0.8); }
+        .site-footer nav {
+            display: flex;
+            align-items: center;
+            gap: clamp(0.8rem, 2vw, 1.6rem);
+        }
+        .site-footer a { transition: color 180ms var(--ease); }
+        .site-footer nav a:hover, .site-footer nav a:focus-visible, .site-footer .foot-note:hover { color: var(--rice); }
+        .foot-note {
+            font-family: var(--font-serif);
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: none;
+            color: var(--gold-bright);
+        }
+
+        /* ---------- reveal ---------- */
+        [data-reveal] {
+            --reveal-x: 0rem;
+            --reveal-y: 1.15rem;
+            --reveal-blur: 0px;
+            opacity: 0;
+            filter: blur(var(--reveal-blur));
+            transform: translate3d(var(--reveal-x), var(--reveal-y), 0);
+            transition:
+                opacity 700ms var(--ease),
+                filter 820ms var(--ease),
+                transform 920ms var(--ease);
+            transition-delay: var(--reveal-delay, 0ms);
+        }
+        [data-reveal].is-visible {
+            opacity: 1;
+            filter: blur(0);
+            transform: translate3d(0, 0, 0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            [data-reveal] { opacity: 1; filter: none; transform: none; }
+            * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
+
+        /* ---------- responsive ---------- */
+        @media (max-width: 860px) {
+            .rail-vertical { display: none; }
+        }
+
+        @media (max-width: 520px) {
+            .arrow { width: 2.4rem; }
+            .arrow--left { left: 0.6rem; }
+            .arrow--right { right: 0.6rem; }
+            .plate { margin: 0 1rem; }
+            .gallery-top { padding-left: 0.8rem; padding-right: 0.8rem; }
+            .plate__frame img { max-width: 72vw; }
+            .plate__caption { max-width: 72vw; }
+            .site-footer { grid-template-columns: auto 1fr auto; }
+            .site-footer nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!--
+        THESIS: NEO MIRAI 复古未来主义 × 一诺的项目档案。项目不是列表,而是像档案样张一样横排的「票面」——暖纸上陈列,琥珀金只落在编号、圆环与那张当前样张的框;朱红日只落在角标与刻度。拒绝暗色霓虹画廊与 3D coverflow。
+        OWN-WORLD: 同首页:暖纸 oklch(94% .035 78) + 112px 发丝网格 + 纸面颗粒 + 右上暖光晕;样张图片对纸面 multiply 混合;当前样张金框 + 金编号 + 下划线,其余压暗;圆环箭头(金环)翻页;页底刻度是朱红日的「speaker-dot」;夜晚页脚收尾。三轨字体:Chakra Petch(标题/拉丁)、中文衬线(项目名)、Azeret Mono(编号/标签)。
+        STORY: 访客从首页金票进入,左移右移掠过一次一行的样张,被金色编号与朱红角标引到正中那件,点开即到外部项目;顶栏随时返回首页。
+        FIRST VIEWPORT: 顶部「← 返回 | 项目档案 | 共 5 项」;中央一行吸附样张,当前样张金框、金编号、朱红角标,下方金「打开 ↗」;右侧竖排「把碎片,做成作品」;底部分页刻度(朱红日=当前)+ 自动播放;左右金环圆钮翻页;夜晚页脚。
+        FORM: NEO MIRAI(用户钦定,参考 impeccable.style/neo-mirai/,与首页同世界)。
+        FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+    -->
+    <header class="gallery-top" data-reveal>
+        <a class="back" href="../index.html">
+            <span class="back-ic" aria-hidden="true">←</span>
+            返回
+        </a>
+        <span class="gallery-top__title">项目档案</span>
+        <span class="gallery-top__count">共 <em>5</em> 项</span>
+    </header>
+
+    <main class="rack" id="rack" aria-label="项目列表">
+        <a class="plate" href="https://destiny-ptarmigan-c2e.notion.site/AI-205bc3525d0780e8a9adf565fc3f5664" target="_blank" rel="noopener">
+            <span class="plate__frame"><img src="../resources/从学习者到表达者.jpg" alt="AI 时代成长手册" loading="lazy" decoding="async"></span>
+            <span class="plate__caption"><span class="plate__index">01</span><span class="plate__title">AI 时代成长手册</span></span>
+            <span class="plate__goto">打开 <span class="plate__goto-ic" aria-hidden="true">↗</span></span>
+        </a>
+        <a class="plate" href="https://allyagent.netlify.app/" target="_blank" rel="noopener">
+            <span class="plate__frame"><img src="../resources/Ally内容策略师.jpg" alt="Ally · AI内容策略师" loading="lazy" decoding="async"></span>
+            <span class="plate__caption"><span class="plate__index">02</span><span class="plate__title">Ally · AI内容策略师</span></span>
+            <span class="plate__goto">打开 <span class="plate__goto-ic" aria-hidden="true">↗</span></span>
+        </a>
+        <a class="plate" href="https://mp.weixin.qq.com/s/lqjhbZ8YLVZ6LyUkAPpqtA" target="_blank" rel="noopener">
+            <span class="plate__frame"><img src="../resources/今天干了点啥.jpg" alt="今天都干了点啥" loading="lazy" decoding="async"></span>
+            <span class="plate__caption"><span class="plate__index">03</span><span class="plate__title">今天都干了点啥</span></span>
+            <span class="plate__goto">打开 <span class="plate__goto-ic" aria-hidden="true">↗</span></span>
+        </a>
+        <a class="plate" href="https://mp.weixin.qq.com/s/dKJ9g_e_jboBxYXibLqfpQ" target="_blank" rel="noopener">
+            <span class="plate__frame"><img src="../resources/cookmate.jpg" alt="CookMate 做饭伙伴" loading="lazy" decoding="async"></span>
+            <span class="plate__caption"><span class="plate__index">04</span><span class="plate__title">CookMate 做饭伙伴</span></span>
+            <span class="plate__goto">打开 <span class="plate__goto-ic" aria-hidden="true">↗</span></span>
+        </a>
+        <a class="plate" href="https://destiny-ptarmigan-c2e.notion.site/121-218bc3525d0780b5b186e4b56463b4f7?pvs=143" target="_blank" rel="noopener">
+            <span class="plate__frame"><img src="../resources/书单.jpg" alt="书单" loading="lazy" decoding="async"></span>
+            <span class="plate__caption"><span class="plate__index">05</span><span class="plate__title">书单</span></span>
+            <span class="plate__goto">打开 <span class="plate__goto-ic" aria-hidden="true">↗</span></span>
+        </a>
+    </main>
+
+    <button class="arrow arrow--left" id="prev" aria-label="上一个项目">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="arrow arrow--right" id="next" aria-label="下一个项目">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+
+    <div class="rail-vertical" aria-hidden="true">
+        <span>把碎片,做成作品</span>
+        <i></i>
+    </div>
+
+    <footer class="gallery-foot" data-reveal>
+        <button class="play" id="play" aria-pressed="true">
+            <svg id="playIcon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+            自动播放
+        </button>
+        <div class="ticks" id="ticks" role="tablist" aria-label="分页"></div>
+    </footer>
+
+    <footer class="site-footer">
+        <a class="brand-lockup brand-lockup-small" href="../index.html" aria-label="一诺主页">
+            <span class="brand-mark" aria-hidden="true"><span></span></span>
+            <span class="brand-word"><span>YINO</span></span>
+        </a>
+        <p>© 一诺 · 数字档案</p>
+        <nav aria-label="社交平台">
+            <a href="../index.html">首页</a>
+            <a href="https://v.douyin.com/xl69-nGOSIg/" target="_blank" rel="noopener">抖音</a>
+            <a href="https://xhslink.com/m/8bl6a3J4i6K" target="_blank" rel="noopener">小红书</a>
+            <a href="https://www.toutiao.com" target="_blank" rel="noopener">头条</a>
+        </nav>
+        <span class="foot-note">拆书 × AI</span>
+    </footer>
+
+    <script>
+        (function () {
+            var rack = document.getElementById('rack');
+            var plates = Array.prototype.slice.call(document.querySelectorAll('.plate'));
+            var ticksWrap = document.getElementById('ticks');
+            var prevBtn = document.getElementById('prev');
+            var nextBtn = document.getElementById('next');
+            var playBtn = document.getElementById('play');
+            var playIcon = document.getElementById('playIcon');
+            var n = plates.length;
+            var active = 0;
+            var paused = false;
+            var timer = null;
+            var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var INTERVAL = 5000;
+            var ticking = false;
+
+            /* build indicator ticks */
+            var ticks = [];
+            for (var i = 0; i < n; i++) {
+                (function (idx) {
+                    var t = document.createElement('button');
+                    t.className = 'tick' + (idx === active ? ' is-active' : '');
+                    t.setAttribute('aria-label', '第 ' + (idx + 1) + ' 个项目');
+                    t.addEventListener('click', function () { goTo(idx); });
+                    ticksWrap.appendChild(t);
+                    ticks.push(t);
+                })(i);
+            }
+
+            function centerOffset(plate) {
+                var rackR = rack.getBoundingClientRect();
+                var p = plate.getBoundingClientRect();
+                return Math.abs((p.left + p.width / 2) - (rackR.left + rackR.width / 2));
+            }
+
+            function updateActive() {
+                var best = 0, bestOff = Infinity;
+                for (var i = 0; i < n; i++) {
+                    var off = centerOffset(plates[i]);
+                    if (off < bestOff) { bestOff = off; best = i; }
+                }
+                if (best !== active) {
+                    active = best;
+                    for (var j = 0; j < n; j++) plates[j].classList.toggle('is-active', j === active);
+                    for (var k = 0; k < n; k++) ticks[k].classList.toggle('is-active', k === active);
+                }
+            }
+
+            function onScroll() {
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(function () {
+                        updateActive();
+                        ticking = false;
+                    });
+                }
+                kickAutoplay();
+            }
+
+            function centerActive(idx, smooth) {
+                var plate = plates[idx];
+                var target = plate.offsetLeft - (rack.clientWidth - plate.clientWidth) / 2;
+                target = Math.max(0, Math.min(target, rack.scrollWidth - rack.clientWidth));
+                rack.scrollTo({ left: target, behavior: smooth ? 'smooth' : 'auto' });
+            }
+
+            function goTo(idx) {
+                idx = ((idx % n) + n) % n;
+                centerActive(idx, !reduced);
+                kickAutoplay();
+            }
+
+            function step(dir) { goTo(active + dir); }
+
+            function schedule() {
+                clearTimeout(timer);
+                if (paused || reduced) return;
+                timer = setTimeout(function () { step(1); }, INTERVAL);
+            }
+            function kickAutoplay() { schedule(); }
+            function setPaused(p) {
+                paused = p;
+                playBtn.setAttribute('aria-pressed', String(!paused));
+                playIcon.innerHTML = paused
+                    ? '<polygon points="6,4 20,12 6,20" fill="currentColor" stroke="none"/>'
+                    : '<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>';
+                schedule();
+            }
+
+            prevBtn.addEventListener('click', function () { step(-1); });
+            nextBtn.addEventListener('click', function () { step(1); });
+            playBtn.addEventListener('click', function () { setPaused(!paused); });
+
+            rack.addEventListener('scroll', onScroll, { passive: true });
+            rack.addEventListener('touchstart', kickAutoplay, { passive: true });
+            rack.addEventListener('pointerdown', kickAutoplay, { passive: true });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+                else if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+            });
+
+            document.addEventListener('visibilitychange', function () {
+                if (document.hidden) { clearTimeout(timer); }
+                else { schedule(); }
+            });
+
+            /* start on the first plate */
+            active = 0;
+            for (var j = 0; j < n; j++) plates[j].classList.toggle('is-active', j === active);
+            for (var k = 0; k < n; k++) ticks[k].classList.toggle('is-active', k === active);
+            schedule();
+            window.addEventListener('load', function () { centerActive(active, false); });
+            window.addEventListener('resize', function () { centerActive(active, false); });
+
+            /* reveal on load */
+            var reveals = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                reveals.forEach(function (el) {
+                    requestAnimationFrame(function () { el.classList.add('is-visible'); });
+                });
+            } else {
+                reveals.forEach(function (el) { el.classList.add('is-visible'); });
+            }
+        })();
+    </script>
+</body>
+</html>

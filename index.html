@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f3ebdc">
+    <meta name="description" content="一诺的知识档案——拆书、AI、终身学习。抖音 / 小红书 / 公众号「一诺的进阶笔记」/ 今日头条。">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="一诺 — 知识博主 · 拆书 × AI">
+    <meta property="og:description" content="把碎片整理成知识卡片,再用 AI 加工成可复用的知识。">
+    <meta property="og:image" content="assets/avatar.jpg?v=5">
+    <title>一诺 — 知识博主 · 拆书 × AI</title>
+    <link rel="preload" href="assets/fonts/chakra-petch-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/azeret-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <style>
+        @font-face {
+            font-family: 'Chakra Petch';
+            font-style: normal;
+            font-weight: 300;
+            font-display: swap;
+            src: url('assets/fonts/chakra-petch-latin-300-normal.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'Chakra Petch';
+            font-style: normal;
+            font-weight: 500;
+            font-display: swap;
+            src: url('assets/fonts/chakra-petch-latin-500-normal.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'Chakra Petch';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url('assets/fonts/chakra-petch-latin-700-normal.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'Azeret Mono';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('assets/fonts/azeret-mono-latin-400-normal.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'Azeret Mono';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url('assets/fonts/azeret-mono-latin-600-normal.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'Azeret Mono';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url('assets/fonts/azeret-mono-latin-700-normal.woff2') format('woff2');
+        }
+
+        :root {
+            color-scheme: light;
+            --paper: oklch(94% 0.035 78);
+            --paper-soft: oklch(91% 0.045 78);
+            --paper-deep: oklch(84% 0.06 73);
+            --ink: oklch(18% 0.035 82);
+            --ink-soft: oklch(32% 0.045 80);
+            --ash: oklch(54% 0.04 80);
+            --line: oklch(73% 0.055 77);
+            --gold: oklch(68% 0.145 74);
+            --gold-bright: oklch(76% 0.165 80);
+            --sun: oklch(64% 0.19 43);
+            --sun-deep: oklch(52% 0.17 38);
+            --night: oklch(17% 0.035 185);
+            --night-soft: oklch(24% 0.04 170);
+            --rice: oklch(97% 0.02 82);
+            --focus: oklch(58% 0.18 42);
+            --shadow: 0 28px 90px oklch(24% 0.05 75 / 0.22);
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-quint: cubic-bezier(0.22, 1, 0.36, 1);
+            --font-display: 'Chakra Petch', 'MiSans', 'HarmonyOS Sans SC', 'PingFang SC', 'Noto Sans SC', sans-serif;
+            --font-serif: 'Songti SC', 'Noto Serif SC', 'STSong', 'SimSun', serif;
+            --font-mono: 'Azeret Mono', 'Cascadia Mono', 'Consolas', monospace;
+            --header-height: 74px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { background: var(--paper); overflow-x: clip; }
+
+        body {
+            min-width: 320px;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 82% 6%, oklch(82% 0.11 79 / 0.5), transparent 17rem),
+                linear-gradient(90deg, oklch(20% 0.015 80 / 0.032) 1px, transparent 1px),
+                linear-gradient(0deg, oklch(20% 0.015 80 / 0.028) 1px, transparent 1px),
+                var(--paper);
+            background-size: auto, 112px 112px, 112px 112px, auto;
+            font-family: var(--font-serif);
+            line-height: 1.55;
+            overflow-x: clip;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        body::before {
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+            pointer-events: none;
+            content: "";
+            opacity: 0.4;
+            mix-blend-mode: multiply;
+            background:
+                radial-gradient(circle at 18% 21%, oklch(100% 0 0 / 0.55), transparent 0.08rem),
+                radial-gradient(circle at 76% 63%, oklch(36% 0.05 70 / 0.16), transparent 0.07rem),
+                radial-gradient(circle at 48% 88%, oklch(38% 0.07 35 / 0.13), transparent 0.06rem);
+            background-size: 0.7rem 0.85rem, 1.1rem 1.3rem, 0.95rem 1.05rem;
+        }
+
+        ::selection { background: var(--sun); color: var(--rice); }
+
+        :focus-visible {
+            outline: 3px solid var(--focus);
+            outline-offset: 5px;
+            border-radius: 2px;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        button, a { -webkit-tap-highlight-color: transparent; }
+
+        /* ---------- header ---------- */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: var(--header-height);
+            padding: max(0.6rem, env(safe-area-inset-top)) clamp(1rem, 3vw, 2rem) 0.6rem;
+            background: linear-gradient(180deg, oklch(94% 0.035 78 / 0.94), oklch(94% 0.035 78 / 0.72), transparent);
+        }
+        .site-header.is-scrolled {
+            background: var(--paper);
+            border-bottom: 1px solid oklch(58% 0.06 76 / 0.25);
+            box-shadow: 0 18px 50px oklch(18% 0.03 76 / 0.08);
+        }
+
+        .brand-lockup {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.62rem;
+            min-height: 44px;
+        }
+        .brand-mark {
+            position: relative;
+            width: 2.1rem;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1px solid oklch(30% 0.035 78 / 0.45);
+            background:
+                linear-gradient(90deg, transparent 49%, var(--ink) 49% 51%, transparent 51%),
+                linear-gradient(0deg, transparent 49%, var(--ink) 49% 51%, transparent 51%),
+                radial-gradient(circle at 72% 25%, var(--rice) 0 19%, transparent 20%),
+                linear-gradient(135deg, var(--gold) 0 38%, var(--sun) 38% 58%, var(--night-soft) 58%);
+        }
+        .brand-mark span {
+            position: absolute;
+            inset: 58% 0 0;
+            background: oklch(84% 0.04 78 / 0.65);
+        }
+        .brand-word {
+            display: grid;
+            gap: 0.08rem;
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            line-height: 1;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .brand-word span:last-child {
+            font-family: var(--font-serif);
+            font-size: 0.66rem;
+            letter-spacing: 0.42em;
+            text-transform: none;
+        }
+
+        .ticket-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.58rem;
+            min-height: 44px;
+            padding: 0.58rem 0.56rem 0.58rem 0.9rem;
+            color: var(--rice);
+            background: var(--gold);
+            font-family: var(--font-display);
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+            transition: background 180ms var(--ease), transform 240ms var(--ease), box-shadow 240ms var(--ease);
+        }
+        .ticket-pill svg {
+            width: 1.44rem;
+            height: 1.44rem;
+            padding: 0.3rem;
+            border: 1px solid currentColor;
+            border-radius: 50%;
+            fill: none;
+            stroke: currentColor;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 1.5;
+        }
+        .ticket-pill:hover,
+        .ticket-pill:focus-visible {
+            background: var(--sun-deep);
+            box-shadow: 0 18px 52px oklch(50% 0.15 50 / 0.32);
+            transform: translateY(-2px);
+        }
+
+        /* ---------- hero ---------- */
+        .hero {
+            position: relative;
+            min-height: clamp(34rem, 62vh, 52rem);
+            padding-top: calc(var(--header-height) + 1rem);
+            overflow: clip;
+            border-bottom: 1px solid var(--line);
+            display: grid;
+            align-items: center;
+        }
+
+        .vertical-poem {
+            position: absolute;
+            left: clamp(1rem, 3.2vw, 2.8rem);
+            top: 34%;
+            z-index: 4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(0.95rem, 1.45vw, 1.35rem);
+            color: var(--ink-soft);
+            font-size: clamp(0.9rem, 1.4vw, 1.15rem);
+        }
+        .vertical-poem span[lang] {
+            writing-mode: vertical-rl;
+            line-height: 1.18;
+            text-orientation: mixed;
+            animation: ink-settle 900ms var(--ease) 260ms both;
+        }
+        .vertical-poem i {
+            display: block;
+            width: 1px;
+            height: clamp(5rem, 11vw, 9rem);
+            background: var(--line);
+            transform-origin: top;
+            animation: vertical-line-draw 720ms var(--ease) 760ms both;
+        }
+        .stamp {
+            display: grid;
+            place-items: center;
+            width: clamp(2.5rem, 3.8vw, 3.1rem);
+            aspect-ratio: 1 / 1.18;
+            border-radius: 4px;
+            color: var(--rice);
+            background: linear-gradient(135deg, var(--sun), var(--sun-deep));
+            font-family: var(--font-serif);
+            font-size: clamp(1rem, 1.5vw, 1.22rem);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            writing-mode: vertical-rl;
+            box-shadow: 0 10px 28px oklch(40% 0.16 42 / 0.4);
+            animation: stamp-press 520ms var(--ease) 1240ms both;
+        }
+
+        .hero-copy {
+            position: relative;
+            z-index: 3;
+            width: min(46rem, calc(100% - clamp(3.2rem, 9vw, 8rem)));
+            margin: 0 auto;
+            padding: clamp(3.4rem, 6vw, 6rem) 0 clamp(3rem, 5vw, 5rem);
+        }
+        .hero-kicker {
+            margin-bottom: 1.15rem;
+            color: var(--sun-deep);
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+        }
+        .hero h1 {
+            margin: 0;
+            color: var(--ink);
+            font-family: var(--font-serif);
+            font-size: clamp(4rem, 14vw, 8rem);
+            font-weight: 600;
+            line-height: 0.98;
+            letter-spacing: 0.04em;
+        }
+        .hero-place {
+            margin: 1.3rem 0 0;
+            color: var(--sun-deep);
+            font-family: var(--font-serif);
+            font-size: clamp(1.4rem, 2.8vw, 2.4rem);
+            font-weight: 500;
+            line-height: 1.1;
+        }
+        .hero-place em {
+            font-style: normal;
+            font-family: var(--font-display);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+        .hero-summary {
+            max-width: 20rem;
+            margin: 1.05rem 0 0;
+            color: var(--ink-soft);
+            font-size: clamp(0.98rem, 1.3vw, 1.2rem);
+            line-height: 1.6;
+        }
+        .hero-meta {
+            display: grid;
+            gap: 0.3rem;
+            margin-top: clamp(2.2rem, 4vw, 3.6rem);
+            color: var(--ash);
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .hero-art {
+            position: absolute;
+            right: clamp(1.2rem, 5vw, 4.5rem);
+            bottom: clamp(1.6rem, 3.4vw, 3.2rem);
+            z-index: 1;
+            width: clamp(9.5rem, 24vw, 15rem);
+            margin: 0;
+        }
+        .hero-art::before {
+            content: "";
+            position: absolute;
+            inset: -22%;
+            z-index: -1;
+            border-radius: 50%;
+            background: radial-gradient(circle, oklch(82% 0.13 76 / 0.75), oklch(64% 0.19 43 / 0.35) 58%, transparent 76%);
+        }
+        .hero-art img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            object-position: center 20%;
+            border: 1px solid oklch(30% 0.035 78 / 0.4);
+            filter: saturate(1.05) contrast(1.05);
+            box-shadow: 0 24px 60px oklch(20% 0.04 60 / 0.18);
+        }
+        .hero-art figcaption {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* ---------- follow: night platform panel ---------- */
+        .follow {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(13rem, 30%) 1fr;
+            overflow: clip;
+            color: var(--rice);
+            background:
+                radial-gradient(circle at 100% 0, oklch(40% 0.08 74 / 0.35), transparent 16rem),
+                linear-gradient(135deg, var(--night), oklch(13% 0.035 180));
+        }
+        .follow::after {
+            position: absolute;
+            right: -8rem;
+            top: -9rem;
+            z-index: 0;
+            width: 21rem;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: linear-gradient(180deg, var(--gold-bright), var(--sun));
+            content: "";
+            opacity: 0.8;
+            mix-blend-mode: multiply;
+            pointer-events: none;
+        }
+        .follow > * { position: relative; z-index: 1; }
+
+        .follow-head {
+            padding: clamp(2.3rem, 4.2vw, 3.6rem);
+            align-self: start;
+        }
+        .section-label {
+            margin: 0 0 0.9rem;
+            color: inherit;
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 4.2vw, 3.6rem);
+            font-weight: 300;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+        .follow-head h2 {
+            max-width: 13rem;
+            margin: 0;
+            color: oklch(91% 0.035 78 / 0.92);
+            font-size: 1.05rem;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .platform-list {
+            --code-col: 4.2rem;
+            --rail-col: 1rem;
+            --marker-size: 0.92rem;
+            list-style: none;
+            margin: 0;
+            padding: clamp(2rem, 3.4vw, 3.2rem) clamp(1.5rem, 3vw, 3rem);
+            display: grid;
+            align-content: start;
+            gap: clamp(0.4rem, 0.9vw, 0.9rem);
+        }
+        .platform-row {
+            position: relative;
+            display: grid;
+            grid-template-columns: var(--code-col) var(--rail-col) minmax(0, 1fr);
+            column-gap: 0.6rem;
+            align-items: center;
+            min-height: 3.9rem;
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .platform-row::before {
+            position: relative;
+            z-index: 2;
+            grid-column: 2;
+            justify-self: center;
+            width: var(--marker-size);
+            aspect-ratio: 1;
+            border: 1px solid var(--gold-bright);
+            border-radius: 50%;
+            background: var(--night);
+            box-shadow: 0 0 0 0.16rem var(--night);
+            content: "";
+            transition: background 260ms var(--ease), transform 360ms var(--ease);
+        }
+        .platform-row:not(:last-child)::after {
+            position: absolute;
+            left: calc(var(--code-col) + 0.6rem + (var(--rail-col) / 2));
+            top: calc(50% + (var(--marker-size) / 2));
+            width: 1px;
+            height: calc(100%);
+            background: var(--gold-bright);
+            content: "";
+            opacity: 0.72;
+        }
+        .platform-row:hover::before,
+        .platform-row:focus-visible::before {
+            background: var(--gold);
+            transform: scale(1.15);
+        }
+        .platform-code {
+            grid-column: 1;
+            color: var(--sun);
+            font-family: var(--font-mono);
+            font-size: 0.66rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+        .platform-body {
+            grid-column: 3;
+            min-width: 0;
+            display: flex;
+            align-items: baseline;
+            gap: 0.8rem;
+        }
+        .platform-name {
+            font-size: clamp(1.02rem, 1.6vw, 1.3rem);
+            font-weight: 500;
+            line-height: 1.15;
+            color: var(--gold-bright);
+        }
+        .platform-body .go {
+            margin-left: auto;
+            display: grid;
+            place-items: center;
+            width: 1.9rem;
+            aspect-ratio: 1;
+            flex: 0 0 auto;
+            border: 1px solid oklch(76% 0.165 80 / 0.55);
+            border-radius: 50%;
+            color: var(--rice);
+            transition: background 180ms var(--ease), transform 240ms var(--ease), border-color 180ms var(--ease);
+        }
+        .platform-body .go svg {
+            width: 0.95rem;
+            height: 0.95rem;
+            fill: none;
+            stroke: currentColor;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 1.6;
+        }
+        .platform-row:hover .go,
+        .platform-row:focus-visible .go {
+            background: var(--sun-deep);
+            border-color: var(--sun-deep);
+            transform: translateX(0.12rem);
+        }
+
+        /* wechat expandable note */
+        .platform-note {
+            grid-column: 3;
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.38s var(--ease);
+        }
+        .platform-note > span {
+            overflow: hidden;
+        }
+        .platform-row[aria-expanded="true"] .platform-note { grid-template-rows: 1fr; }
+        .platform-note__inner {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.1rem 0 1.1rem;
+            color: oklch(91% 0.035 78 / 0.78);
+            font-size: 0.86rem;
+            line-height: 1.5;
+        }
+        .platform-note__inner i {
+            flex: 0 0 auto;
+            width: 0.28rem;
+            height: 0.28rem;
+            border-radius: 50%;
+            background: var(--sun);
+        }
+
+        /* ---------- archive: red band ---------- */
+        .archive {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            min-height: clamp(15rem, 28vw, 21rem);
+            overflow: clip;
+            border-bottom: 1px solid var(--line);
+        }
+        .archive-copy {
+            display: grid;
+            align-content: center;
+            gap: 1rem;
+            padding: clamp(2.2rem, 4.5vw, 4rem) clamp(1.4rem, 3.5vw, 3.5rem);
+            color: var(--rice);
+            background:
+                linear-gradient(90deg, oklch(12% 0.025 185 / 0.28) 1px, transparent 1px),
+                linear-gradient(0deg, oklch(12% 0.025 185 / 0.2) 1px, transparent 1px),
+                linear-gradient(135deg, var(--sun), var(--sun-deep));
+            background-size: 80px 80px, 80px 80px, auto;
+        }
+        .archive-copy .section-label {
+            margin-bottom: 0;
+            font-size: 0.78rem;
+            font-family: var(--font-mono);
+            letter-spacing: 0.22em;
+        }
+        .archive-copy h2 {
+            max-width: 20rem;
+            margin: 0;
+            font-size: clamp(1.5rem, 2.9vw, 2.5rem);
+            font-weight: 400;
+            line-height: 1.18;
+        }
+        .text-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            width: fit-content;
+            min-height: 44px;
+            margin-top: 0.4rem;
+            color: var(--ink-soft);
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 180ms var(--ease), transform 240ms var(--ease);
+        }
+        .text-action-icon {
+            position: relative;
+            display: inline-grid;
+            place-items: center;
+            width: 1.44rem;
+            height: 1.44rem;
+            flex: 0 0 auto;
+            border: 1px solid currentColor;
+            border-radius: 50%;
+            font-family: var(--font-serif);
+            font-size: 0.92em;
+            line-height: 1;
+        }
+        .text-action-light { color: var(--gold-bright); }
+        .text-action:hover,
+        .text-action:focus-visible {
+            color: var(--rice);
+            transform: translateX(0.2rem);
+        }
+        .archive-art {
+            margin: 0;
+            overflow: hidden;
+        }
+        .archive-art img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            mix-blend-mode: multiply;
+            filter: saturate(1.02) contrast(1.03);
+        }
+
+        /* ---------- footer ---------- */
+        .site-footer {
+            display: grid;
+            grid-template-columns: auto 1fr auto auto;
+            align-items: center;
+            gap: clamp(1rem, 4vw, 3rem);
+            padding: 0.6rem clamp(1.2rem, 3vw, 2rem);
+            color: var(--gold-bright);
+            background: var(--night);
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .brand-lockup-small .brand-mark { width: 1.55rem; }
+        .site-footer p { margin: 0; color: oklch(74% 0.08 84 / 0.8); }
+        .site-footer nav {
+            display: flex;
+            align-items: center;
+            gap: clamp(0.8rem, 2vw, 1.6rem);
+        }
+        .site-footer a { transition: color 180ms var(--ease); }
+        .site-footer nav a:hover,
+        .site-footer nav a:focus-visible,
+        .site-footer .foot-note:hover { color: var(--rice); }
+        .foot-note {
+            font-family: var(--font-serif);
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: none;
+            color: var(--gold-bright);
+        }
+
+        /* ---------- reveal ---------- */
+        [data-reveal] {
+            --reveal-x: 0rem;
+            --reveal-y: 1.15rem;
+            --reveal-blur: 0px;
+            opacity: 0;
+            filter: blur(var(--reveal-blur));
+            transform: translate3d(var(--reveal-x), var(--reveal-y), 0);
+            transition:
+                opacity 700ms var(--ease),
+                filter 820ms var(--ease),
+                transform 920ms var(--ease);
+            transition-delay: var(--reveal-delay, 0ms);
+        }
+        [data-reveal].is-visible {
+            opacity: 1;
+            filter: blur(0);
+            transform: translate3d(0, 0, 0);
+        }
+        .hero-copy[data-reveal] { --reveal-x: -1.1rem; --reveal-blur: 2px; }
+        .follow-head[data-reveal],
+        .archive-copy[data-reveal] { --reveal-x: -0.8rem; --reveal-blur: 3px; }
+        .platform-list[data-reveal] { --reveal-y: 1.4rem; }
+
+        @keyframes ink-settle {
+            from { opacity: 0; filter: blur(4px); transform: translate3d(0, -0.45rem, 0); }
+            to { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0); }
+        }
+        @keyframes vertical-line-draw {
+            from { opacity: 0; transform: scaleY(0); }
+            to { opacity: 1; transform: scaleY(1); }
+        }
+        @keyframes stamp-press {
+            0% { opacity: 0; filter: blur(3px); transform: scale(1.2); }
+            100% { opacity: 1; filter: blur(0); transform: scale(1); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            [data-reveal] { opacity: 1; filter: none; transform: none; }
+            * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
+
+        /* ---------- responsive ---------- */
+        @media (max-width: 860px) {
+            .follow { grid-template-columns: 1fr; }
+            .follow-head { padding-bottom: 0.4rem; }
+        }
+
+        @media (max-width: 760px) {
+            .vertical-poem { display: none; }
+            .hero { grid-template-columns: none; min-height: auto; }
+            .hero-copy {
+                width: min(100% - 2.4rem, 32rem);
+                margin: 0 auto;
+                padding: calc(var(--header-height) + 2.4rem) 0 1.6rem;
+            }
+            .hero h1 { font-size: clamp(3.4rem, 15vw, 6rem); }
+            .hero-art {
+                position: relative;
+                inset: auto;
+                width: min(68%, 17rem);
+                margin: 0 auto 2.4rem;
+            }
+            .hero-meta { margin-top: 2rem; }
+            .archive { grid-template-columns: 1fr; }
+            .archive-art { min-height: 15rem; }
+            .archive-art img { min-height: 15rem; }
+            .site-footer { grid-template-columns: auto 1fr auto; }
+            .site-footer nav { display: none; }
+            .platform-list { padding: 1.6rem 1.4rem 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!--
+        THESIS: NEO MIRAI 复古未来主义 × 一诺的知识档案。暖纸面承载墨字,琥珀金与朱红日是唯二暖饱和色——金只给主动作,朱红只给印章与点缀;一束竖排诗句与一枚朱红「一诺」印章确立身份。拒绝圆角卡片堆、冷色科技感与黑黄配色。
+        OWN-WORLD: 同 impeccable 的 neo-mirai:暖纸 oklch(94% .035 78) 铺底,112px 发丝网格 + 纸面颗粒 + 右上暖光晕;墨茶夜(--night)承担平台面板与页脚;琥珀金(--gold)承担票形主按钮;朱红日(--sun)承担印章、点缀与红带。三轨字体:Chakra Petch(拉丁 display/标签)、中文衬线 Songti/Noto Serif SC/SimSun(名字与中文)、Azeret Mono(小标签/编号)。图片对项目作 multiply 混合。
+        STORY: 访客扫码进来,几秒认出「一诺,拆书×AI 的知识博主」——大名字 + 竖排诗句 + 朱红印章确立身份,四个平台入口去关注,金票形按钮与朱红带去项目档案。
+        FIRST VIEWPORT: 顶部品牌行(圆环标记 + YINO + 金票「项目档案」);中央大字「一诺」(中文衬线)+ 朱红「拆书 × AI」+ 一句介绍;右上方竖排「把碎片变成知识」+ 一枚朱红「一诺」印章;其下夜晚面板四行平台入口(金环标记 + 金色名字 + mono 代码 + 圆环箭头,公众号可展开);朱红「Archive」带;底部夜晚页脚。琥珀金只给主动作,朱红只给印章与点缀。
+        FORM: NEO MIRAI(用户钦定,参考 impeccable.style/neo-mirai/)。
+        FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+    -->
+    <header class="site-header" id="siteHeader">
+        <a class="brand-lockup" href="#" aria-label="一诺主页">
+            <span class="brand-mark" aria-hidden="true"><span></span></span>
+            <span class="brand-word"><span>YINO</span><span>一诺</span></span>
+        </a>
+        <a class="ticket-pill" href="resources/orbit.html">
+            <span>项目档案</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12m-5-5 5 5-5 5"/></svg>
+        </a>
+    </header>
+
+    <main id="main">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="vertical-poem" aria-hidden="true">
+                <span lang="zh">把碎片变成知识</span>
+                <i></i>
+                <span class="stamp" aria-hidden="true">一诺</span>
+            </div>
+
+            <div class="hero-copy" data-reveal>
+                <p class="hero-kicker">YINO · 知识档案</p>
+                <h1 id="hero-title">一诺</h1>
+                <p class="hero-place">知识博主 · <em>拆书 × AI</em></p>
+                <p class="hero-summary">把碎片整理成知识卡片,再用 AI 加工成可复用的知识。</p>
+                <div class="hero-meta" aria-label="平台与定位">
+                    <span>抖音 · 小红书 · 公众号 · 今日头条</span>
+                </div>
+            </div>
+
+            <figure class="hero-art" data-reveal>
+                <img src="assets/avatar.jpg?v=5" alt="一诺的头像" width="720" height="720">
+                <figcaption>一诺 —— 知识博主 · 拆书 × AI</figcaption>
+            </figure>
+        </section>
+
+        <section class="follow" id="follow" aria-labelledby="follow-title">
+            <div class="follow-head" data-reveal>
+                <p class="section-label">Follow</p>
+                <h2 id="follow-title">四个平台,一起成长</h2>
+            </div>
+            <ul class="platform-list" data-reveal>
+                <li>
+                    <a class="platform-row" href="https://v.douyin.com/xl69-nGOSIg/" target="_blank" rel="noopener">
+                        <span class="platform-code">DOUYIN</span>
+                        <span class="platform-body">
+                            <span class="platform-name">抖音</span>
+                            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="platform-row" href="https://xhslink.com/m/8bl6a3J4i6K" target="_blank" rel="noopener">
+                        <span class="platform-code">XHS</span>
+                        <span class="platform-body">
+                            <span class="platform-name">小红书</span>
+                            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <div class="platform-row" role="button" tabindex="0" id="wechat" aria-expanded="false" aria-controls="wechatNote">
+                        <span class="platform-code">WECHAT</span>
+                        <span class="platform-body">
+                            <span class="platform-name">公众号</span>
+                            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg></span>
+                        </span>
+                        <span class="platform-note" id="wechatNote"><span><span class="platform-note__inner"><i aria-hidden="true"></i>微信搜索「一诺的进阶笔记」关注</span></span></span>
+                    </div>
+                </li>
+                <li>
+                    <a class="platform-row" href="https://www.toutiao.com" target="_blank" rel="noopener">
+                        <span class="platform-code">TOUTIAO</span>
+                        <span class="platform-body">
+                            <span class="platform-name">今日头条</span>
+                            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+        <section class="archive" id="archive" aria-labelledby="archive-title">
+            <div class="archive-copy" data-reveal>
+                <p class="section-label">Archive</p>
+                <h2 id="archive-title">把书与碎片,做成可用的作品</h2>
+                <a class="text-action text-action-light" href="resources/orbit.html">
+                    浏览项目档案
+                    <span class="text-action-icon" aria-hidden="true">→</span>
+                </a>
+            </div>
+            <figure class="archive-art" data-reveal>
+                <img src="resources/书单.jpg" alt="书单项目" loading="lazy" decoding="async">
+            </figure>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <a class="brand-lockup brand-lockup-small" href="#" aria-label="一诺主页">
+            <span class="brand-mark" aria-hidden="true"><span></span></span>
+            <span class="brand-word"><span>YINO</span></span>
+        </a>
+        <p>© 一诺 · 数字档案</p>
+        <nav aria-label="社交平台">
+            <a href="https://v.douyin.com/xl69-nGOSIg/" target="_blank" rel="noopener">抖音</a>
+            <a href="https://xhslink.com/m/8bl6a3J4i6K" target="_blank" rel="noopener">小红书</a>
+            <a href="#follow">公众号</a>
+            <a href="https://www.toutiao.com" target="_blank" rel="noopener">头条</a>
+        </nav>
+        <span class="foot-note">拆书 × AI</span>
+    </footer>
+
+    <script>
+        (function () {
+            var header = document.getElementById('siteHeader');
+            var scrolled = false;
+            function onScroll() {
+                var s = window.scrollY > 8;
+                if (s !== scrolled) {
+                    scrolled = s;
+                    header.classList.toggle('is-scrolled', s);
+                }
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            /* wechat expand */
+            var wechat = document.getElementById('wechat');
+            var note = document.getElementById('wechatNote');
+            if (wechat && note) {
+                function toggle(force) {
+                    var open = force !== undefined ? force : wechat.getAttribute('aria-expanded') !== 'true';
+                    wechat.setAttribute('aria-expanded', String(open));
+                }
+                wechat.addEventListener('click', function (e) { e.stopPropagation(); toggle(); });
+                wechat.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+                });
+                document.addEventListener('click', function (e) {
+                    if (!wechat.contains(e.target)) toggle(false);
+                });
+            }
+
+            /* reveal on scroll */
+            var reveals = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+            if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (en) {
+                        if (en.isIntersecting) {
+                            en.target.classList.add('is-visible');
+                            io.unobserve(en.target);
+                        }
+                    });
+                }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+                reveals.forEach(function (el) { io.observe(el); });
+            } else {
+                reveals.forEach(function (el) { el.classList.add('is-visible'); });
+            }
+        })();
+    </script>
+</body>
+</html>
